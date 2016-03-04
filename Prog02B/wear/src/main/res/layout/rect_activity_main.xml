@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.cookmilk.prog02b.MainActivity"
+    tools:deviceIds="wear_square"
+    android:weightSum="1">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.25" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:text="Full Name"
+        android:id="@+id/button2"
+        android:layout_gravity="center_horizontal"
+        android:background="#00ffffff"
+        android:textSize="24dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.25" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Party"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.26" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="133dp"
+        android:layout_height="31dp"
+        android:id="@+id/button"
+        android:layout_gravity="center_horizontal"
+        android:textSize="9dp"
+        android:text="2012 US Presidential vote in this county"
+        android:background="#00ffffff" />
+
+</LinearLayout>
