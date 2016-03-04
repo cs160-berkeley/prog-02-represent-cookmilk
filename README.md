@@ -13,12 +13,12 @@ See PartB
 
 ## Screenshots
 
-<img src="screenshots/main" height="400" alt="Screenshot"/>
-<img src="screenshots/main2" height="400" alt="Screenshot"/>
-<img src="screenshots/main3" height="400" alt="Screenshot"/>
-<img src="screenshots/main4" height="400" alt="Screenshot"/>
-<img src="screenshots/main5" height="400" alt="Screenshot"/>
-<img src="screenshots/main6" height="400" alt="Screenshot"/>
+<img src="screenshots/main.png" height="400" alt="Screenshot"/>
+<img src="screenshots/main2.png" height="400" alt="Screenshot"/>
+<img src="screenshots/main3.png" height="400" alt="Screenshot"/>
+<img src="screenshots/main4.png" height="400" alt="Screenshot"/>
+<img src="screenshots/main5.png" height="400" alt="Screenshot"/>
+<img src="screenshots/main6.png" height="400" alt="Screenshot"/>
 ## Acknowledgments
 
 * Hat tip to anyone who's code was used
