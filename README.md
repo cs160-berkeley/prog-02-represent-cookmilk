@@ -4,7 +4,8 @@ Basic implementation of Represent! App.
 
 ## Authors
 
-FirstName LastName ([liu.chang@berkeley.edu](mailto:liu.chang@berkeley.edu))
+Chang Liu
+([liu.chang@berkeley.edu](mailto:liu.chang@berkeley.edu))
 
 ## Demo Video
 
