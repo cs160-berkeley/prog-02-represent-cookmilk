@@ -4,17 +4,17 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageApi;
 import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
+
 /**
- * Created by Cookmilk on 3/3/16.
+ * Created by joleary on 2/19/16.
  */
-public class PhoneToWatchService extends Service {
+public class WatchToPhoneService extends Service {
 
     private GoogleApiClient mApiClient;
 

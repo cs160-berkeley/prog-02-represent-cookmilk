@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cookmilk.prog02b">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -46,6 +50,28 @@
         <activity android:name=".SearchActivity">
             <intent-filter>
                 <action android:name="com.example.cookmilk.prog02b.SearchActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".PhoneToWatchService" />
+        <!-- Listeners are special services that need to be declared like below, as BIND_LISTENER -->
+        <service
+            android:name=".PhoneListenerService"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.android.geo.AIzaSyCmTk1hB2Tp-0r4PM7nYDm7tyQtJlVR3nY"
+            android:value="AIzaSyCmTk1hB2Tp-0r4PM7nYDm7tyQtJlVR3nY" />
+
+        <activity android:name=".Searchrep">
+            <intent-filter>
+                <action android:name="com.example.cookmilk.prog02b.Searchrep" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

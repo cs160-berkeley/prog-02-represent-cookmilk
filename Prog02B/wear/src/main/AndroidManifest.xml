@@ -3,6 +3,7 @@
     package="com.example.cookmilk.prog02b">
 
     <uses-feature android:name="android.hardware.type.watch" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -10,6 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault">
+        <uses-library android:name="com.google.android.wearable" android:required="false" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
@@ -29,12 +31,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".NotificationActivity"
-            android:exported="true"
-            android:allowEmbedded="true"
-            android:taskAffinity=""
-            android:theme="@android:style/Theme.DeviceDefault.Light" />
-        <service android:name=".OngoingNotificationListenerService">
+
+        <service android:name=".WatchToPhoneService" />
+        <!-- Listeners are special services that need to be declared like below, as BIND_LISTENER -->
+        <service android:name=".WatchListenerService"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
             </intent-filter>

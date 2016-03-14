@@ -7,10 +7,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-public class LocationsenActivity extends AppCompatActivity {
+public class Searchrep extends AppCompatActivity {
     ImageView img;
     TextView tw1, tw2, tw3, tw4, tw0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,9 +20,9 @@ public class LocationsenActivity extends AppCompatActivity {
         tw3 = (TextView) findViewById(R.id.twcom);
         tw4 = (TextView) findViewById(R.id.twbill);
         img = (ImageView)findViewById(R.id.img);
-        String name = LocationActivity.getNames();
-        String eod = LocationActivity.getEOD();
-        String imgs = LocationActivity.getImg();
+        String name = SearchActivity.getNames();
+        String eod = SearchActivity.getEOD();
+        String imgs = SearchActivity.getImg();
         tw0.setText(name);
         tw1.setText("D");
         tw2.setText(eod);

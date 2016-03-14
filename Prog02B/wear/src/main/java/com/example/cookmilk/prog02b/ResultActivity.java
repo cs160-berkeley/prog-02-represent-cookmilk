@@ -7,10 +7,14 @@ import android.app.FragmentTransaction;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.graphics.PorterDuff;
+import android.support.wearable.view.GridPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.wearable.view.GridViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ResultActivity extends Activity {
@@ -30,133 +35,115 @@ public class ResultActivity extends Activity {
      * may be best to switch to a
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+//    private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    private ViewPager mViewPager;
+//    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-//        votePage();
+//        final LinearLayout stub = (LinearLayout) findViewById(R.id.linear);
+        final GridViewPager pager = (GridViewPager) findViewById(R.id.pager);
 
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        // if (extras != null) {
+        //     int randInt = extras.getInt("ZIP");
+        //     ((Helper) this.getApplication()).setZip(randInt);
+        // }
+        if (extras != null) {
+            String candidateString = extras.getString("CANDIDATE");
+            if (candidateString.equals("One")) {
+                pager.setAdapter(new MyGridViewPagerAdapter(this, 0));
+            } else if (candidateString.equals("Two")) {
+                pager.setAdapter(new MyGridViewPagerAdapter(this, 1));
+            } else {
+                pager.setAdapter(new MyGridViewPagerAdapter(this, 2));
+            }
 
-    }
-//    Button but;
-//    public void votePage() {
-//        but = (Button)findViewById(R.id.button3);
-//        but.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Intent intent = new Intent("com.example.cookmilk.prog02b.VoteActivity");
-//                        startActivity(intent);
-//                    }
-//                }
-//        );
-//    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_result, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        } else {
+            pager.setAdapter(new MyGridViewPagerAdapter(this, 2));
         }
 
-        return super.onOptionsItemSelected(item);
+        LinearLayout vote2012 = (LinearLayout) findViewById(R.id.clicker);
+
+        vote2012.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ResultActivity.this, VoteActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
+    private class MyGridViewPagerAdapter extends GridPagerAdapter {
+        Context contexts;
+        int rows;
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
+        public MyGridViewPagerAdapter(final Context context, int row) {
+            contexts = context;
+            rows = row;
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_result, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-    }
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
-        }
-
-        @Override
-        public int getCount() {
-            // Show 3 total pages.
+        public int getColumnCount(int arg0) {
             return 3;
         }
 
         @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "SECTION 1";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
+        public int getRowCount() {
+            return 1;
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, final int row, final int col) {
+            final View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.detail_result, container, false);
+            final TextView textViewParty = (TextView) view.findViewById(R.id.party);
+            final Button buttonName = (Button) view.findViewById(R.id.name);
+            if (col == 0) {
+                buttonName.setText("Barbara Boxer");
+                textViewParty.setText("D");
+            } else if (col == 1) {
+                buttonName.setText("Dianne Feinstein");
+                textViewParty.setText("D");
+            } else {
+                buttonName.setText("Sam Farr");
+                textViewParty.setText("D");
             }
-            return null;
+            buttonName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("T", "Watch button is clicked");
+                    Intent sendIntent = new Intent(getBaseContext(), WatchToPhoneService.class);
+
+                    if (col == 0) {
+                        sendIntent.putExtra("CANDIDATE", "first");
+                    } else if (col == 1) {
+                        sendIntent.putExtra("CANDIDATE", "second");
+                    } else {
+                        sendIntent.putExtra("CANDIDATE", "third");
+                    }
+                    startService(sendIntent);
+                }
+            });
+            Log.d("T", "Watch button is set");
+            container.addView(view);
+            return view;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int row, int col, Object view) {
+            container.removeView((View)view);
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
         }
     }
 }
